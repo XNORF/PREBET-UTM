@@ -42,7 +42,7 @@
       <TextField fx:id="cdDestination" editable="false" layoutX="199.0" layoutY="141.0" prefHeight="25.0" prefWidth="324.0" />
       <TextField fx:id="cdTime" editable="false" layoutX="199.0" layoutY="218.0" prefHeight="25.0" prefWidth="324.0" />
       <TextField fx:id="cdPhone" editable="false" layoutX="199.0" layoutY="292.0" prefHeight="25.0" prefWidth="324.0" />
-      <Button layoutX="227.0" layoutY="335.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="COMPLETE" textAlignment="CENTER" textFill="#2e9000">
+      <Button layoutX="227.0" layoutY="335.0" mnemonicParsing="false" onAction="#completeBooking" prefHeight="40.0" prefWidth="130.0" text="COMPLETE" textAlignment="CENTER" textFill="#2e9000">
          <font>
             <Font name="Arial Nova Cond" size="18.0" />
          </font>

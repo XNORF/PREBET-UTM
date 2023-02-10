@@ -8,19 +8,18 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    // START DEFINE FIRST PAGE (HOME PAGE)
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("1HOME.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("UTM PREBET SYSTEM");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
     public static void main(String[] args) {
+        // LAUNCH
         launch(args);
-        // String time = "1:30PM";
-        // String regex = "([1-9]|[1][0-2]):[0-5][0-9][P|A]M";
-        // System.out.println(time.matches(regex));
 
     }
 }
