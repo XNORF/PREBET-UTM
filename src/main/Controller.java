@@ -44,6 +44,10 @@ public class Controller {
         return book;
     }
 
+    public static void deleteList(int index) {
+        book.remove(index);
+    }
+
     public void Home(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("1HOME.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

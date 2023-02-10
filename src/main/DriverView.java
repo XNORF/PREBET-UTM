@@ -9,8 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class DriverView {
@@ -22,6 +25,14 @@ public class DriverView {
     private TextField dTime;
     @FXML
     private TextField dPhone;
+    @FXML
+    private TextField cdFrom;
+    @FXML
+    private TextField cdDestination;
+    @FXML
+    private TextField cdTime;
+    @FXML
+    private TextField cdPhone;
     @FXML
     private Button nextButton;
     @FXML
@@ -44,7 +55,15 @@ public class DriverView {
     }
 
     public void acceptBooking(ActionEvent event) throws IOException {
+        Alert alert = new Alert(null);
 
+        alert.setAlertType(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Accept Booking?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            Controller.deleteList(page - 1);
+        }
     }
 
     public void displayBooking(int page, ArrayList<Booking> book) {
