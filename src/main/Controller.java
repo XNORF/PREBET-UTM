@@ -31,19 +31,6 @@ public class Controller {
     private String matricPattern = "[a-zA-Z][0-9][0-9][a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9]";
     public ArrayList<Booking> book = new ArrayList<Booking>();
 
-    public void StartApp(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("1HOME.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-        book.add(new Booking("KTDI, UTMJB", "PARADIGM MALL", "10:30AM", "012-3456789"));
-        book.add(new Booking("PARADIGM MALL", "KTC, UTMJB", "9:30AM", "011-2233445"));
-        book.add(new Booking("KTF, UTMJB", "TAMAN UNIVERSITI", "4:10PM", "012-5667788"));
-
-    }
-
     public void Home(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("1HOME.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -94,8 +81,16 @@ public class Controller {
     public void dLogin(ActionEvent event) throws IOException {
         matric = dMatric.getText();
 
+        if (book.isEmpty()) {
+
+            book.add(new Booking("KTDI, UTMJB", "PARADIGM MALL", "10:30AM", "012-3456789"));
+            book.add(new Booking("PARADIGM MALL", "KTC, UTMJB", "9:30AM", "011-2233445"));
+            book.add(new Booking("KTF, UTMJB", "TAMAN UNIVERSITI", "4:10PM", "012-5667788"));
+
+        }
+
         if (matric.matches(matricPattern)) {
-            pageNumber = 1;
+            pageNumber = 0;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("5DriverYes.fxml"));
             root = loader.load();
             DriverView driverView = loader.getController();
