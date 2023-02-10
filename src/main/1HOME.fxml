@@ -5,18 +5,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
    <children>
-      <Button fx:id="Passenger_button" graphicTextGap="6.0" layoutX="74.0" layoutY="185.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="183.0" text="Passenger" textAlignment="CENTER" textFill="RED">
+      <Button fx:id="Passenger_button" graphicTextGap="6.0" layoutX="74.0" layoutY="185.0" mnemonicParsing="false" onAction="#pPage" prefHeight="71.0" prefWidth="183.0" text="Passenger" textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="Arial Nova Cond" size="30.0" />
          </font></Button>
-      <Button fx:id="Driver_button" layoutX="343.0" layoutY="185.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="183.0" text="Driver" textAlignment="CENTER" textFill="#2200ff">
+      <Button fx:id="Driver_button" layoutX="343.0" layoutY="185.0" mnemonicParsing="false" onAction="#dPage" prefHeight="71.0" prefWidth="183.0" text="Driver" textAlignment="CENTER" textFill="#2200ff">
          <font>
             <Font name="Arial Nova Cond" size="30.0" />
          </font>
       </Button>
-      <Label layoutX="74.0" layoutY="14.0" text="WELCOME TO PREBET SYSTEM">
+      <Label layoutX="35.0" layoutY="14.0" text="WELCOME TO PREBET SYSTEM">
          <font>
             <Font name="Arial Nova Cond Light Italic" size="39.0" />
          </font>
