@@ -15,19 +15,11 @@ import javafx.stage.Stage;
 
 public class DriverView {
     @FXML
-    private TextField pFrom;
-    @FXML
     private TextField dFrom;
-    @FXML
-    private TextField pDestination;
     @FXML
     private TextField dDestination;
     @FXML
-    private TextField pTime;
-    @FXML
     private TextField dTime;
-    @FXML
-    private TextField pPhone;
     @FXML
     private TextField dPhone;
     @FXML
@@ -41,7 +33,7 @@ public class DriverView {
 
     int page;
 
-    ArrayList<Booking> list = new ArrayList<Booking>();
+    ArrayList<Booking> list = Controller.getArrayList();
 
     public void Home(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("1HOME.fxml"));
@@ -58,16 +50,32 @@ public class DriverView {
     public void displayBooking(int page, ArrayList<Booking> book) {
         try {
             this.page = page;
-            if (this.list.isEmpty()) {
-                this.list = (ArrayList) book.clone();
-            }
-
             dFrom.setText(list.get(page).getFrom());
             dDestination.setText(list.get(page).getDestination());
             dTime.setText(list.get(page).getTime());
             dPhone.setText(list.get(page).getPhoneNumber());
         } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+
+    public void newPage(ActionEvent event) {
+        String button = ((Node) event.getSource()).getId();
+
+        if (button.equals("nextButton")) {
+            page += 1;
+            if (page < list.size()) {
+                displayBooking(page, list);
+            } else {
+                page -= 1;
+            }
+        } else if (button.equals("previousButton")) {
+            page -= 1;
+            if (page >= 0) {
+                displayBooking(page, list);
+            } else {
+                page += 1;
+            }
         }
     }
 }

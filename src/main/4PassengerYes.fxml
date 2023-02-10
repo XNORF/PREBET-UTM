@@ -13,7 +13,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="pFrom" layoutX="179.0" layoutY="76.0" prefHeight="25.0" prefWidth="324.0" />
+      <TextField fx:id="pFrom" layoutX="179.0" layoutY="76.0" prefHeight="25.0" prefWidth="324.0" promptText="eg. KTC, UTMJB" />
       <Label layoutX="29.0" layoutY="74.0" text="FROM: ">
          <font>
             <Font size="20.0" />
@@ -39,9 +39,9 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="pDestination" layoutX="179.0" layoutY="142.0" prefHeight="25.0" prefWidth="324.0" />
-      <TextField fx:id="pTime" layoutX="179.0" layoutY="220.0" prefHeight="25.0" prefWidth="324.0" />
-      <TextField fx:id="pPhone" layoutX="179.0" layoutY="294.0" prefHeight="25.0" prefWidth="324.0" />
+      <TextField fx:id="pDestination" layoutX="179.0" layoutY="142.0" prefHeight="25.0" prefWidth="324.0" promptText="eg. Paradigm Mall" />
+      <TextField fx:id="pTime" layoutX="179.0" layoutY="220.0" prefHeight="25.0" prefWidth="324.0" promptText="eg. 1:20PM" />
+      <TextField fx:id="pPhone" layoutX="179.0" layoutY="294.0" prefHeight="25.0" prefWidth="324.0" promptText="eg. 012-3456789" />
       <Button layoutX="224.0" layoutY="341.0" mnemonicParsing="false" onAction="#createBooking" text="SUBMIT" textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="Arial Nova Cond" size="18.0" />

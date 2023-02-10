@@ -18,9 +18,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
-        // String regex = "[1-9]|[1][0-2]:[0-5][0-9][P|A]M";
-        // System.out.println("2:29PM".matches(regex));
+        // String time = "1:30PM";
+        // String regex = "([1-9]|[1][0-2]):[0-5][0-9][P|A]M";
+        // System.out.println(time.matches(regex));
 
     }
 }
