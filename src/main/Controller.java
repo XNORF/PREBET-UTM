@@ -40,20 +40,48 @@ public class Controller {
     private int pageNumber;
 
     // VARIABLE FOR CHECKING MATRIC
-    private String matric;
+    private static String matric;
     private String matricPattern = "[a-zA-Z][0-9][0-9][a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9]";
 
     // ARRAYLIST FOR BOOKING OBJECT
     public static ArrayList<Booking> book = new ArrayList<Booking>();
+
+    // ARRAYLIST FOR USER
+    public static ArrayList<User> user = new ArrayList<User>();
+    final String passenger = "USER";
+    final String driver = "USER+";
+    public static String pageType;
 
     // GET ARRAYLIST DATA FOR BOOKING OBJECT
     public static ArrayList<Booking> getArrayList() {
         return book;
     }
 
+    public static ArrayList<User> getUserList() {
+        return user;
+    }
+
+    public static String getMatric() {
+        return matric;
+    }
+
+    public static String getPageType() {
+        return pageType;
+    }
+
     // DELETE ARRAYLIST
     public static void deleteList(int index) {
+        for (int i = 0; i < user.size(); i++) {
+            if (user.get(i).getMatric().equals(matric)) {
+                user.get(i).addAcceptedBooking(book.get(index));
+                System.out.println(user.get(i).getAcceptedList());
+            }
+        }
         book.remove(index);
+    }
+
+    public static ArrayList<Booking> getList(int index) {
+        return book;
     }
 
     // GO HOME PAGE METHOD
@@ -65,13 +93,47 @@ public class Controller {
         stage.show();
     }
 
-    // GO PASSENGER LOGIN PAGE METHOD
-    public void pPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("2PASSENGER.fxml"));
+    // GO BOOKING HISTORY PAGE METHOD
+    public void bookHistory(ActionEvent event) throws IOException {
+        pageType = passenger;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("8pBookingHistory.fxml"));
+        root = loader.load();
+        TableController table = loader.getController();
+        // LIST BOOKING DATA PER OBJECT IN BOOKING LIST
+        table.startTable();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    // GO BOOKED HISTORY PAGE METHOD
+    public void bookedHistory(ActionEvent event) throws IOException {
+        pageType = driver;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("10dBookedHistory.fxml"));
+        root = loader.load();
+        TableController table = loader.getController();
+        // LIST BOOKING DATA PER OBJECT IN BOOKING LIST
+        table.startTable();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    // GO PASSENGER LOGIN PAGE METHOD
+    public void pPage(ActionEvent event) throws IOException {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("2PASSENGER.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     // GO DRIVER LOGIN PAGE METHOD
@@ -83,13 +145,37 @@ public class Controller {
         stage.show();
     }
 
-    // PASSENGER LOGIN METHOD + GO TO BOOKING FORM PAGE
-    public void pLogin(ActionEvent event) throws IOException {
+    public void pHomepage(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("7PassengerHome.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    // PASSENGER LOGIN METHOD + GO TO PASSENGER HOME PAGE
+    public void pHome(ActionEvent event) throws IOException {
         matric = pMatric.getText();
 
         // VALIDATE MATRIC PATTERN FOR LOGIN
         if (matric.matches(matricPattern)) {
-            Parent root = FXMLLoader.load(getClass().getResource("4PassengerYes.fxml"));
+            if (!user.isEmpty()) {
+                Boolean found = false;
+                for (int i = 0; i < user.size(); i++) {
+                    if (user.get(i).getMatric().equals(matric)) {
+                        found = true;
+                        break;
+                    } else {
+                        found = false;
+                    }
+                }
+                if (!found) {
+                    user.add(new User(matric, passenger));
+                }
+            } else {
+                user.add(new User(matric, passenger));
+            }
+            Parent root = FXMLLoader.load(getClass().getResource("7PassengerHome.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -105,11 +191,19 @@ public class Controller {
                 System.out.println(e);
             }
         }
-
     }
 
-    // DRIVER LOGIN METHOD + GO TO BOOKING LIST PAGE
-    public void dLogin(ActionEvent event) throws IOException {
+    // GO TO BOOKING FORM PAGE
+    public void pBooking(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("4PassengerYes.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    // DRIVER LOGIN METHOD + GO TO DRIVER HOME PAGE
+    public void dHome(ActionEvent event) throws IOException {
         matric = dMatric.getText();
 
         // SAMPLE DATA IF NO DATA IN APPLICATION
@@ -125,17 +219,34 @@ public class Controller {
         // VALIDATE MATRIC PATTERN FOR LOGIN
         if (matric.matches(matricPattern)) {
             pageNumber = 0;
-            // GO TO BOOKING LIST PAGE
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("5DriverYes.fxml"));
-            root = loader.load();
-            DriverView driverView = loader.getController();
-            // LIST BOOKING DATA PER OBJECT IN BOOKING LIST
-            driverView.displayBooking(pageNumber, book);
+
+            if (!user.isEmpty()) {
+                Boolean found = false;
+                for (int i = 0; i < user.size(); i++) {
+                    if (user.get(i).getMatric().equals(matric)) {
+                        found = true;
+                        if (!user.get(i).getUserType().equals(driver)) {
+                            user.get(i).setUserType(driver);
+                        }
+                        break;
+                    } else {
+                        found = false;
+                    }
+                }
+
+                if (!found) {
+                    user.add(new User(matric, driver));
+                }
+
+            } else {
+                user.add(new User(matric, driver));
+            }
+            Parent root = FXMLLoader.load(getClass().getResource("9DriverHome.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-            System.out.println(book);
+
         } else {
             try {
                 Alert alert = new Alert(AlertType.ERROR);
@@ -146,6 +257,20 @@ public class Controller {
                 System.out.println(e);
             }
         }
+    }
+
+    // GO TO BOOKING LIST PAGE
+    public void bookingList(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("5DriverYes.fxml"));
+        root = loader.load();
+        DriverView driverView = loader.getController();
+        // LIST BOOKING DATA PER OBJECT IN BOOKING LIST
+        driverView.displayBooking(pageNumber, book);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println(book);
     }
 
     // CREATE BOOKING
@@ -186,11 +311,20 @@ public class Controller {
             alert.setTitle("Confirmation");
             alert.setHeaderText("Confirm Booking?");
 
-            // IF BOOKING CONFIMED, INSERT DATA INTO ARRAYLIST FOR BOOKING OBJECT AND PROMPT
+            // IF BOOKING CONFIRMED, INSERT DATA INTO ARRAYLIST FOR BOOKING OBJECT AND
+            // PROMPT
             // A MESSAGE
             if (alert.showAndWait().get() == ButtonType.OK) {
                 try {
+
                     book.add(new Booking(pFrom.getText(), pDestination.getText(), pTime.getText(), pPhone.getText()));
+
+                    for (int i = 0; i < user.size(); i++) {
+                        if (user.get(i).getMatric().equals(matric)) {
+                            user.get(i).addBooking(book.get(book.size() - 1));
+                            System.out.println(user.get(i).getBookingList());
+                        }
+                    }
                     System.out.println(book);
                     alert.setAlertType(AlertType.INFORMATION);
                     alert.setTitle("Booking");
@@ -198,7 +332,7 @@ public class Controller {
                     alert.show();
 
                     // LOAD HOME PAGE
-                    Parent root = FXMLLoader.load(getClass().getResource("1HOME.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("7PassengerHome.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
@@ -209,6 +343,7 @@ public class Controller {
                     alert.setTitle("Booking");
                     alert.setHeaderText("Book unsuccessfully");
                     alert.show();
+                    System.out.println(e);
                 }
             }
         }

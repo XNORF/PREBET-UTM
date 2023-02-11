@@ -59,6 +59,14 @@ public class DriverView {
         stage.show();
     }
 
+    public void dHome(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("9DriverHome.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     // ACCEPT BOOKING METHOD
     public void acceptBooking(ActionEvent event) throws IOException {
         Alert alert = new Alert(null);
@@ -100,8 +108,9 @@ public class DriverView {
             alert.setTitle("Complete");
             alert.setHeaderText("Ride complete!");
             alert.show();
+
             Controller.deleteList(page);
-            Parent root = FXMLLoader.load(getClass().getResource("1HOME.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("9DriverHome.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

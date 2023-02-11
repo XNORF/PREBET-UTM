@@ -27,7 +27,7 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <Button layoutX="266.0" layoutY="229.0" mnemonicParsing="false" onAction="#pLogin" prefHeight="27.0" prefWidth="67.0" text="Login" />
+      <Button layoutX="266.0" layoutY="229.0" mnemonicParsing="false" onAction="#pHome" prefHeight="27.0" prefWidth="67.0" text="Login" />
       <Button layoutX="23.0" layoutY="27.0" mnemonicParsing="false" onAction="#Home" text="Back" />
    </children>
 </AnchorPane>

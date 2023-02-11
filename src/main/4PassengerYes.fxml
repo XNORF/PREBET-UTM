@@ -47,6 +47,6 @@
             <Font name="Arial Nova Cond" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="27.0" layoutY="26.0" mnemonicParsing="false" onAction="#Home" text="HOME" />
+      <Button layoutX="27.0" layoutY="26.0" mnemonicParsing="false" onAction="#pHomepage" text="HOME" />
    </children>
 </AnchorPane>
