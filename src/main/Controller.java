@@ -39,7 +39,7 @@ public class Controller {
     // DEFINE NESCESSARY VARIABLES
     private int pageNumber;
 
-    // VARIABLE FOR CHECKING MATRIC
+    // VARIABLES FOR CHECKING MATRIC
     private static String matric;
     private String matricPattern = "[a-zA-Z][0-9][0-9][a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9]";
 
@@ -57,6 +57,12 @@ public class Controller {
         return book;
     }
 
+    // GET BOOKING LIST WITH INDEX PARAMETER
+    public static ArrayList<Booking> getList(int index) {
+        return book;
+    }
+
+    // GET USER LIST
     public static ArrayList<User> getUserList() {
         return user;
     }
@@ -69,7 +75,7 @@ public class Controller {
         return pageType;
     }
 
-    // DELETE ARRAYLIST
+    // DELETE A BOOKING DATA
     public static void deleteList(int index) {
         for (int i = 0; i < user.size(); i++) {
             if (user.get(i).getMatric().equals(matric)) {
@@ -78,10 +84,6 @@ public class Controller {
             }
         }
         book.remove(index);
-    }
-
-    public static ArrayList<Booking> getList(int index) {
-        return book;
     }
 
     // GO HOME PAGE METHOD
@@ -93,14 +95,14 @@ public class Controller {
         stage.show();
     }
 
-    // GO BOOKING HISTORY PAGE METHOD
+    // GO BOOKING HISTORY PAGE METHOD (PASSENGER)
     public void bookHistory(ActionEvent event) throws IOException {
         pageType = passenger;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("8pBookingHistory.fxml"));
         root = loader.load();
         TableController table = loader.getController();
-        // LIST BOOKING DATA PER OBJECT IN BOOKING LIST
+        // INVOKE BOOKING TABLE TO DISPLAY TO NEXT PAGE
         table.startTable();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -108,13 +110,13 @@ public class Controller {
         stage.show();
     }
 
-    // GO BOOKED HISTORY PAGE METHOD
+    // GO BOOKED HISTORY PAGE METHOD (DRIVER)
     public void bookedHistory(ActionEvent event) throws IOException {
         pageType = driver;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("10dBookedHistory.fxml"));
         root = loader.load();
         TableController table = loader.getController();
-        // LIST BOOKING DATA PER OBJECT IN BOOKING LIST
+        // INVOKE BOOKING TABLE TO DISPLAY TO NEXT PAGE
         table.startTable();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -145,6 +147,7 @@ public class Controller {
         stage.show();
     }
 
+    // GO PASSENGER HOMEPAGE
     public void pHomepage(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("7PassengerHome.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -312,8 +315,7 @@ public class Controller {
             alert.setHeaderText("Confirm Booking?");
 
             // IF BOOKING CONFIRMED, INSERT DATA INTO ARRAYLIST FOR BOOKING OBJECT AND
-            // PROMPT
-            // A MESSAGE
+            // PROMPT A MESSAGE
             if (alert.showAndWait().get() == ButtonType.OK) {
                 try {
 

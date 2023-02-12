@@ -34,6 +34,7 @@ public class TableController {
     private Scene scene;
     private Parent root;
 
+    // DEFINE VARIABLES
     private ArrayList<User> userList = Controller.getUserList();
     private ObservableList<Booking> list = FXCollections.observableArrayList();
     private ArrayList<Booking> bookList;
@@ -50,6 +51,7 @@ public class TableController {
         stage.show();
     }
 
+    // GO PASSENGER HOME
     public void pHomepage(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("7PassengerHome.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -58,6 +60,7 @@ public class TableController {
         stage.show();
     }
 
+    // GO DRIVER HOME
     public void dHome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("9DriverHome.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -66,16 +69,15 @@ public class TableController {
         stage.show();
     }
 
+    // INSERT TABLE DATA
     public void startTable() {
         try {
             for (int i = 0; i < userList.size(); i++) {
-                System.out.println("index: " + i);
-                System.out.println("size: " + userList.size());
-                System.out.println("1");
+                // FIND BOOKING LIST BASED ON MATRIC SESSION
                 if (userList.get(i).getMatric().equals(matric)) {
+                    // IF PASSENGER, DISPLAY PASSENGER BOOKING, IF DRIVER, DISPLAY ACCEPTED BOOKING
                     if (pageType == "USER") {
                         for (int j = 0; j < userList.get(i).getBookingList().size(); j++) {
-                            System.out.println("2");
                             bookList = userList.get(i).getBookingList();
                             list.add(bookList.get(j));
                         }
@@ -85,9 +87,10 @@ public class TableController {
                             list.add(bookList.get(j));
                         }
                     }
-                    System.out.println(list);
                 }
             }
+
+            // INSERT DATA INTO TABLE
             time.setCellValueFactory(new PropertyValueFactory<Booking, String>("time"));
             from.setCellValueFactory(new PropertyValueFactory<Booking, String>("from"));
             destination.setCellValueFactory(new PropertyValueFactory<Booking, String>("destination"));

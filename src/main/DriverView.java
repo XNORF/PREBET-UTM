@@ -45,6 +45,7 @@ public class DriverView {
     private Scene scene;
     private Parent root;
 
+    // DEFINE VARIABLE
     int page;
 
     // GET ARRAYLIST FROM PREVIOUS CLASS
@@ -59,6 +60,7 @@ public class DriverView {
         stage.show();
     }
 
+    // DRIVER HOME METHOD
     public void dHome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("9DriverHome.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -75,7 +77,7 @@ public class DriverView {
         alert.setTitle("Confirmation");
         alert.setHeaderText("Accept Booking?");
 
-        // ONCE CONFIRMED, DISPLAY SELECTED RIDE TO BE CARRY OUT
+        // ONCE CONFIRMED, DISPLAY SELECTED RIDE TO BE CARRY OUT IN THE NEXT PAGE
         if (alert.showAndWait().get() == ButtonType.OK) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("6CurrentRide.fxml"));
             root = loader.load();
@@ -134,18 +136,12 @@ public class DriverView {
 
     // DISPLAY ACCEPTED BOOKING DATA
     public void displayCurrent(int index) {
-        System.out.println(list.get(index).getFrom());
-        System.out.println(list.get(index).getDestination());
-        System.out.println(list.get(index).getTime());
-        System.out.println(list.get(index).getPhoneNumber());
-
         cdFrom.setText(list.get(index).getFrom());
         cdDestination.setText(list.get(index).getDestination());
         cdTime.setText(list.get(index).getTime());
         cdPhone.setText(list.get(index).getPhoneNumber());
 
         this.page = index;
-
     }
 
     // NAVIGATE BETWEEN EACH ARRAYLIST DATA (NEW PAGE FOR EACH ARRAYLIST)
